@@ -1,9 +1,12 @@
 package com.example.quizapp.screens
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -34,9 +37,38 @@ class QuestionFragment : Fragment() {
 
         setQuizByTask(currentTask)
 
+        viewModel.taskNumber.observe(viewLifecycleOwner) {
+            binding.progressBar.progress =
+                (it.toDouble() / viewModel.getAllTasksAmount() * 100).toInt()
+            binding.tvProgress.text = getString(
+                R.string.title_progress,
+                it,
+                viewModel.getAllTasksAmount()
+            )
+        }
+
+
+
+
         binding.btNextQuestion.setOnClickListener {
+
             viewModel.dropLastQuestion()
-            findNavController().navigate(R.id.action_questionFragment_self)
+
+            val pickedAnswer = binding.rgVariants.checkedRadioButtonId
+
+            val picked = view.findViewById<RadioButton>(pickedAnswer)
+
+            if (picked.text == currentTask.answer) {
+                viewModel.increaseCorrectAnswersAmount()
+            }
+
+            if (viewModel.getRestTasksAmount() == 0) {
+                findNavController().navigate(R.id.action_questionFragment_to_finishFragment)
+            } else {
+                viewModel.increaseTaskNumber()
+                findNavController().navigate(R.id.action_questionFragment_self)
+            }
+
         }
     }
 

@@ -4,87 +4,134 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layoutAnimation="@anim/slide_in_animation_layout"
+    android:background="@color/grey_purple"
     tools:context=".screens.QuestionFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="20dp">
+        android:layout_height="match_parent">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_marginTop="100dp"
-            android:backgroundTint="@color/weak_purple"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="25dp"
-            app:contentPadding="40dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:progress="50"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/tv_progress"
+            android:fontFamily="@font/open_sans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_progress"
+            android:textColor="@color/white"
+            android:textSize="35sp"
+           app:layout_constraintTop_toBottomOf="@id/progress_bar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
+            android:layout_marginTop="20dp"
+            android:layoutAnimation="@anim/slide_in_animation_layout"
+            android:padding="10dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/tv_progress">
 
-            <LinearLayout
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_current_task"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="400dp"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/light_grey_purple"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="20dp"
+                app:contentPadding="40dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_question"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/open_sans_bold"
-                    android:textColor="@color/white"
-                    android:textSize="35sp"
-                    tools:text="Ich ... Alex." />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                <RadioGroup
-                    android:id="@+id/rg_variants"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/rb_variant_1"
-                        style="@style/radio_button_style"
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_question"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        tools:text="heißt" />
+                        android:fontFamily="@font/open_sans_bold"
+                        android:textColor="@color/white"
+                        android:textSize="30sp"
+                        tools:text="Ich ... Alex." />
 
-                    <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/rb_variant_2"
-                        style="@style/radio_button_style"
+                    <RadioGroup
+                        android:id="@+id/rg_variants"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        tools:text="heißen" />
+                        android:layout_marginTop="10dp">
 
-                    <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/rb_variant_3"
-                        style="@style/radio_button_style"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        tools:text="heiße" />
+                        <com.google.android.material.radiobutton.MaterialRadioButton
+                            android:id="@+id/rb_variant_1"
+                            style="@style/radio_button_style"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            tools:text="heißt" />
 
-                    <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/rb_variant_4"
-                        style="@style/radio_button_style"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        tools:text="heisen" />
+                        <com.google.android.material.radiobutton.MaterialRadioButton
+                            android:id="@+id/rb_variant_2"
+                            style="@style/radio_button_style"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            tools:text="heißen" />
 
-                </RadioGroup>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+                        <com.google.android.material.radiobutton.MaterialRadioButton
+                            android:id="@+id/rb_variant_3"
+                            style="@style/radio_button_style"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            tools:text="heiße" />
+
+                        <com.google.android.material.radiobutton.MaterialRadioButton
+                            android:id="@+id/rb_variant_4"
+                            style="@style/radio_button_style"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            tools:text="heisen" />
+
+                    </RadioGroup>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/bt_next_question"
-            android:layout_marginTop="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_bold"
+            android:text="@string/next"
+            android:textAllCaps="false"
+            android:textSize="25sp"
+            app:backgroundTint="@color/pink"
+            app:cornerRadius="10dp"
+            app:icon="@drawable/ic_arrow_forward"
+            app:iconGravity="textEnd"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView" />
-
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </FrameLayout>
