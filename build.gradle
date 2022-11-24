@@ -3,7 +3,7 @@ buildscript {
     ext {
         viewModel_version = '2.5.1'
         fragment_version = '1.5.1'
-        navigation_version = '2.5.1'
+        navigation_version = '2.5.3'
     }
 }
 
